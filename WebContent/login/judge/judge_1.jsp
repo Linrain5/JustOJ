@@ -1,7 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.Set"%>
+<%@page import="just.oj.Questionname"%>
+<%@page import="just.oj.Quest"%>
+<%request.setCharacterEncoding("UTF-8"); %>
+<jsp:useBean id="student" scope="page" class="just.oj.Quest"></jsp:useBean>
+ <jsp:setProperty property="*" name="quest"/>
     <% Cookie[] cookies = request.getCookies();
-    
+    	
     	if(cookies!=null){
     	            for(int i = 0;i < cookies.length;i++){
     	                if(cookies[i].getName().equals("JustOJname")){       
@@ -95,17 +102,20 @@
         <div id="content"> 
           <div style="margin-top:20px;"> 
             <div id="main"> 
+            	<%
+	Set<Quest> sts=Questionname.getInstance().tijiao();
+	Iterator<Quest> it=sts.iterator();
+	%>
+            	<%
+	while (it.hasNext()){
+		Quest st=it.next();
+	%>
               <li>
-              <a href="#" shape="rect">问题1</a>
+              <a href="#" shape="rect"><%=st.getid() %>.<%=st.getname() %></a>
             </li>
-            <li>
-              <a href="#" shape="rect">问题2</a>
-            </li>
-            <li>
-              <a href="#" shape="rect">问题3</a>
-            </li>
-
-            </div>  
+ 
+            <% }%>
+           </div> 
             <div id="sidebar"> 
               <div class="bloc rounded" style="margin-top:20px;"> 
                 <h3>Declaration</h3>  
@@ -183,8 +193,7 @@
     </div> 
   </body>
 </html>
-<%  			
-
+<% 
 				break;
     	 }
     }   	 
