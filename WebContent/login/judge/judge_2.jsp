@@ -4,7 +4,7 @@
     
     	if(cookies!=null){
     	            for(int i = 0;i < cookies.length;i++){
-    	                if(cookies[i].getName().equals("JustOJname")){       
+    	                if(cookies[i].getName().equals("JustOJname")){      
     %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -55,6 +55,7 @@
           </div> 
         </div> 
       </div>  
+	</div>
     <!-- end top wrapper -->  
     <div id="wrapper"> 
       <div id="container"> 
@@ -90,10 +91,9 @@
             <div id="sidebaa"> 
 
               <div class="bloc rounded" style="margin-top:20px;"> 
-                <form action="" method="post">
+                <form action="/Compile" method="post">
                   <label>请选择语言</label>
                 <select name="language">
-                   <option>--请选择--</option>
                   <option value="java">Java</option>  
                   <option value="c">C</option>  
                   <option value="cpp">C++</option>
