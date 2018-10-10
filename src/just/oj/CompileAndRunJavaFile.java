@@ -16,6 +16,12 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.lang.reflect.Method;
 import java.net.URI;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -31,7 +37,13 @@ import javax.tools.StandardLocation;
 import javax.tools.ToolProvider;
 
 public class CompileAndRunJavaFile {
-	
+	private String WID="";
+	public String getWID() {
+		return this.WID;
+	}
+	public void setWID(String wid) {
+		this.WID=wid;
+	}
     private String abc = "";
    public void setabc(String abc) {
 	   this.abc=abc;
@@ -79,6 +91,10 @@ public class CompileAndRunJavaFile {
         return isCompileAndRunOK;
     }
     
+    private boolean isWrongAnswer = false;
+    public boolean isWrongAnswer() {
+    	return isWrongAnswer;
+    }
     
     private int limitTime = 2000;
 
@@ -227,4 +243,30 @@ public class CompileAndRunJavaFile {
             return content;
         }
     }
+    public ArrayList<String>  panduan() {
+		try {
+			ArrayList<String> quest = new ArrayList<>();
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			String sql = "select * from question where id="+getWID();
+			String url="jdbc:mysql://" + "127.0.0.1" + "/" + "JustOJ" + "?serverTimezone=UTC&useSSL=false&useUnicode=true&characterEncoding=UTF8";
+			Connection conn = DriverManager.getConnection(url, "root", "3455H*B87pp");
+			PreparedStatement pst = conn.prepareStatement(sql);
+			ResultSet rs = pst.executeQuery();
+			rs.next();
+			quest.add(rs.getString("yanglia_1"));
+			quest.add(rs.getString("yanglia_2"));
+			quest.add(rs.getString("yanglia_3"));
+			quest.add(rs.getString("yanglia_4"));
+			quest.add(rs.getString("yanglia_5"));
+			pst.close();
+			conn.close();
+			return quest;
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			return null;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 }

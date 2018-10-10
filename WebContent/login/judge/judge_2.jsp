@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@page import="java.util.Iterator"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="just.oj.Questionname"%>
+<%@page import="just.oj.Quest"%>
+<%request.setCharacterEncoding("UTF-8"); %>
+<jsp:useBean id="quest" scope="page" class="just.oj.Quest"></jsp:useBean>
+ <jsp:setProperty property="*" name="quest"/>
     <% Cookie[] cookies = request.getCookies();
     
     	if(cookies!=null){
@@ -36,7 +43,7 @@
                   <a href="judge_1.jsp" shape="rect">考题总界面</a>
                 </li>
                 <li id="current" style="border:none">
-                  <a href="judge_2.jsp" shape="rect">代码提交区</a>
+                  <a href="#" shape="rect">代码提交区</a>
                 </li>
                <li>
                   <a href="judge_3.jsp"shape="rect">江科大排名</a>
@@ -69,37 +76,46 @@
              
             <div class="bloc rounded" style="margin-top:20px;"> 
                 <h3>Problem description</h3>  
+            <%
+				ArrayList<Quest> sts=Questionname.getInstance().tijiao();
+				int where=0;
+				String whe = request.getParameter("where_id");
+				where = Integer.valueOf(whe);
+			%>
+			
                 <p>
-                  一个球从100m高度自由落下,每次落地后反跳回原来高度的一半,再落下,再反弹.求它在第N次落地时共经过多少米? 
-                </p>    
+                  <%=sts.get(where).getquestion()%>
+                </p>  
+    
             </div>
 
             <div class="bloc rounded" style="margin-top:20px;"> 
                 <h3>样例输入</h3>  
                 <p>
-                 反弹的次数N    例如 2
+                <%=sts.get(where).gety1() %>
                 </p>    
             </div>  
             <div class="bloc rounded" style="margin-top:20px;"> 
                 <h3>样例输出</h3>  
                 <p>
-                 小球经过的路程(保留四位小数)   例如 200.0000
+                 <%=sts.get(where).getya1() %>
                 </p>    
             </div>  
           </div>
 
             <div id="sidebaa"> 
-
+				
               <div class="bloc rounded" style="margin-top:20px;"> 
                 <form action="/Compile" method="post">
+                
                   <label>请选择语言</label>
                 <select name="language">
                   <option value="java">Java</option>  
                   <option value="c">C</option>  
                   <option value="cpp">C++</option>
                 </select>
-                  <textarea rows="30" cols="60" name="code">
-                    在这里粘贴上你的代码
+                <input name="wid" value="<%=sts.get(where).getid()%>">
+                  <textarea rows="30" cols="60" name="code">在这里粘贴上你的代码
                   </textarea>
                   <input type="submit" value="提交代码"/>
                 </form>

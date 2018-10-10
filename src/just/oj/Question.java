@@ -64,11 +64,9 @@ public class Question extends HttpServlet {
 			return a;
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			System.out.println("«˝∂Øº”‘ÿ ß∞‹");
 			return 0;
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("sql”Ôæ‰“Ï≥£");
 			return 0;
 		}
 	}

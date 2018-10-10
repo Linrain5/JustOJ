@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="java.util.Iterator"%>
-<%@page import="java.util.Set"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="just.oj.Questionname"%>
 <%@page import="just.oj.Quest"%>
 <%request.setCharacterEncoding("UTF-8"); %>
-<jsp:useBean id="student" scope="page" class="just.oj.Quest"></jsp:useBean>
+<jsp:useBean id="quest" scope="page" class="just.oj.Quest"></jsp:useBean>
  <jsp:setProperty property="*" name="quest"/>
     <% Cookie[] cookies = request.getCookies();
     	
@@ -44,7 +44,7 @@
                   <a href="judge_1.jsp" shape="rect">考题总界面</a>
                 </li>
                 <li>
-                  <a href="judge_2.jsp" shape="rect">代码提交区</a>
+                  <a href="judge_2.jsp?where_id=0" shape="rect">代码提交区</a>
                 </li>
                <li>
                   <a href="judge_3.jsp"shape="rect">江科大排名</a>
@@ -103,18 +103,21 @@
           <div style="margin-top:20px;"> 
             <div id="main"> 
             	<%
-	Set<Quest> sts=Questionname.getInstance().tijiao();
+	ArrayList<Quest> sts=Questionname.getInstance().tijiao();
 	Iterator<Quest> it=sts.iterator();
 	%>
             	<%
+            	int where = 0;
 	while (it.hasNext()){
 		Quest st=it.next();
 	%>
               <li>
-              <a href="#" shape="rect"><%=st.getid() %>.<%=st.getname() %></a>
+              <a href="judge_2.jsp?where_id=<%= String.valueOf(where) %>" shape="rect"><%=st.getid() %>.<%=st.getname() %></a>
             </li>
  
-            <% }%>
+            <% 
+    where++;        
+	}%>
            </div> 
             <div id="sidebar"> 
               <div class="bloc rounded" style="margin-top:20px;"> 

@@ -36,7 +36,7 @@
                   <a href="judge_1.jsp" shape="rect">考题总界面</a>
                 </li>
                 <li>
-                  <a href="judge_2.jsp" shape="rect">代码提交区</a>
+                  <a href="judge_2.jsp?where_id=0" shape="rect">代码提交区</a>
                 </li>
                <li>
                   <a href="judge_3.jsp"shape="rect">江科大排名</a>
