@@ -227,7 +227,6 @@ public class CompileAndRunJavaFile {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            //鎭㈠杈撳叆杈撳嚭娴�
             System.setIn(stdIn);
             System.setOut(stdOut);
         }
