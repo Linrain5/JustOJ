@@ -78,6 +78,7 @@ public class Compile extends HttpServlet {
 				zeng(name,string);
 			}
 		}
+		response.sendRedirect("/login/judge/judge_4.jsp");
 	}
 
 	public ArrayList<String> panduan(String wid) {
